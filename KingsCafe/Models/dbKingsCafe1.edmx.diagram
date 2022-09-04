@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d820fc407c074638bbd97b4e30136fff" Name="Diagram1">
+        <EntityTypeShape EntityType="dbKingsCafe1.tblAdmin" Width="1.5" PointX="8.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbKingsCafe1.tblfeedback" Width="1.5" PointX="8.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbKingsCafe1.tblFoodCategory" Width="1.5" PointX="1.5" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbKingsCafe1.tblFoodProduct" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbKingsCafe1.tblIngredient" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbKingsCafe1.tblIngredientLinking" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbKingsCafe1.tblOrder" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbKingsCafe1.tblOrderDetail" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbKingsCafe1.tblOrderLinking" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbKingsCafe1.tblOrderPurchase" Width="1.5" PointX="11" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbKingsCafe1.tblOrderPurchaseDetail" Width="1.5" PointX="5.25" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbKingsCafe1.tblRider" Width="1.5" PointX="3.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbKingsCafe1.tblRiderAssigningOrder" Width="1.5" PointX="6" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbKingsCafe1.tblWorker" Width="1.5" PointX="8.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbKingsCafe1.tblWorkerDetail" Width="1.5" PointX="6" PointY="10.5" IsExpanded="true" />
+        <AssociationConnector Association="dbKingsCafe1.FK_tblfoodproducts_tblfoodcategory" ManuallyRouted="false" />
+        <AssociationConnector Association="dbKingsCafe1.FK_tblingredientlinking_tblfoodproducts" ManuallyRouted="false" />
+        <AssociationConnector Association="dbKingsCafe1.FK_tblorderdetails_tblfoodproducts" ManuallyRouted="false" />
+        <AssociationConnector Association="dbKingsCafe1.FK_tblingredientlinking_tblingredient" ManuallyRouted="false" />
+        <AssociationConnector Association="dbKingsCafe1.FK_tblorderlinking_tblingredient" ManuallyRouted="false" />
+        <AssociationConnector Association="dbKingsCafe1.FK_tblorderpurchasedetail_tblingredient" ManuallyRouted="false" />
+        <AssociationConnector Association="dbKingsCafe1.FK_tblorderdetails_tblorder" ManuallyRouted="false" />
+        <AssociationConnector Association="dbKingsCafe1.FK_tblRiderAssigningOrder_tblorder" ManuallyRouted="false" />
+        <AssociationConnector Association="dbKingsCafe1.FK_tblorderlinking_tblorderdetails" ManuallyRouted="false" />
+        <AssociationConnector Association="dbKingsCafe1.FK_tblorderpurchase_tblworker" ManuallyRouted="false" />
+        <AssociationConnector Association="dbKingsCafe1.FK_tblRiderAssigningOrder_tblRiderAssigningOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="dbKingsCafe1.FK_tblworkerdetail_tblworkerdetail" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

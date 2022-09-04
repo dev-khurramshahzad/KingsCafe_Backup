@@ -1,0 +1,969 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbKingsCafe1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblAdmin">
+          <Key>
+            <PropertyRef Name="ADMIN_ID" />
+          </Key>
+          <Property Name="ADMIN_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ADMIN_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ADMIN_EMAIL" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ADMIN_PASSWORD" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ADMIN_CONTACT" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ADMIN_ADDRESS" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ADMIN_PICTURE" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblfeedback">
+          <Key>
+            <PropertyRef Name="FEEDBACK_ID" />
+          </Key>
+          <Property Name="FEEDBACK_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FEEDBACK_DESCRIPTION" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="FEEDBACK_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="WHATSAPP_NO" Type="int" Nullable="false" />
+          <Property Name="PHONE_NO" Type="int" Nullable="false" />
+          <Property Name="ADDRESS" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblFoodCategory">
+          <Key>
+            <PropertyRef Name="FOOD_CATEGORY_ID" />
+          </Key>
+          <Property Name="FOOD_CATEGORY_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FOOD_CATEGORY_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FOOD_CATEGORY_PICTURE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PicLink" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tblFoodProducts">
+          <Key>
+            <PropertyRef Name="FOOD_PRODUCTS_ID" />
+          </Key>
+          <Property Name="FOOD_PRODUCTS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FOOD_PRODUCTS_NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FOOD_PRODUCTS_PRICE" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="FOOD_PRODUCTS_PICTURE" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FOOD_CATEGORY_FID" Type="int" Nullable="false" />
+          <Property Name="PicLink" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tblIngredient">
+          <Key>
+            <PropertyRef Name="INGREDIENT_ID" />
+          </Key>
+          <Property Name="INGREDIENT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INGREDIENT_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="INGREDIENT_PRICE" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="INGREDIENT_UNIT_PRICE" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblIngredientLinking">
+          <Key>
+            <PropertyRef Name="INGREDIENT_LINKING_ID" />
+          </Key>
+          <Property Name="INGREDIENT_LINKING_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FOOD_PRODUCTS_FID" Type="int" Nullable="false" />
+          <Property Name="INGREDIENT_FID" Type="int" Nullable="false" />
+          <Property Name="INGREDIENT_LINKING_QUANTITY" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblOrder">
+          <Key>
+            <PropertyRef Name="ORDER_ID" />
+          </Key>
+          <Property Name="ORDER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ORDER_CUSTOMER_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="ORDER_CUSTOMER_ADDRESS" Type="nvarchar" MaxLength="100" />
+          <Property Name="ORDER_CUSTOMER_CONTACT" Type="nvarchar" MaxLength="100" />
+          <Property Name="ORDER_STATUS" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ORDER_DATE" Type="datetime" Nullable="false" />
+          <Property Name="ORDER_PAYMENT" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblOrderDetails">
+          <Key>
+            <PropertyRef Name="ORDER_DETAILS_ID" />
+          </Key>
+          <Property Name="ORDER_DETAILS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ORDER_FID" Type="int" Nullable="false" />
+          <Property Name="FOOD_PRODUCTS_FID" Type="int" Nullable="false" />
+          <Property Name="ORDER_DETAILS_QUANTITY" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ORDER_DETAILS_PRICE" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ORDER_DETAILS_isAdding" Type="bit" />
+          <Property Name="Ispicking" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblOrderLinking">
+          <Key>
+            <PropertyRef Name="ORDER_LINKING_ID" />
+          </Key>
+          <Property Name="ORDER_LINKING_ID" Type="int" Nullable="false" />
+          <Property Name="INGREDIENT_FID" Type="int" Nullable="false" />
+          <Property Name="ORDER_DETAILS_FID" Type="int" Nullable="false" />
+          <Property Name="ORDER_LINKING_PRICE" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblOrderPurchase">
+          <Key>
+            <PropertyRef Name="ORDER_PURCHASE_ID" />
+          </Key>
+          <Property Name="ORDER_PURCHASE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ORDER_PURCHASE_DATE_TIME" Type="datetime" Nullable="false" />
+          <Property Name="WORKER_FID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblOrderPurchaseDetail">
+          <Key>
+            <PropertyRef Name="ORDER_PURCHASE_DETAIL_ID" />
+          </Key>
+          <Property Name="ORDER_PURCHASE_DETAIL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ORDER_PURCHASE_DETAIL_QUANTITY" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ORDER_PURCHASE_DETAIL_PRICE" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ORDER_PURCHASE_FID" Type="int" Nullable="false" />
+          <Property Name="INGREDIENT_FID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblRider">
+          <Key>
+            <PropertyRef Name="RIDER_ID" />
+          </Key>
+          <Property Name="RIDER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RIDER_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RIDER_CONTACT" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RIDER_ADDRESS" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RIDER_PAY" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="LocationRider" Type="nvarchar" MaxLength="50" />
+          <Property Name="RIDER_EMAIL" Type="nvarchar" MaxLength="50" />
+          <Property Name="RIDER_PASSWORD" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblRiderAssigningOrder">
+          <Key>
+            <PropertyRef Name="RIDER_ASSIGNING_ORDER_ID" />
+          </Key>
+          <Property Name="RIDER_ASSIGNING_ORDER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ORDER_FID" Type="int" Nullable="false" />
+          <Property Name="RIDER_FID" Type="int" Nullable="false" />
+          <Property Name="Date_Time" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblWorker">
+          <Key>
+            <PropertyRef Name="WORKER_ID" />
+          </Key>
+          <Property Name="WORKER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WORKER_NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="WORKER_EMAIL" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="WORKER_PASSWORD" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="WORKER_CONTACT" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="WORKER_ADDRESS" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="WORKER_PICTURES" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblWorkerDetail">
+          <Key>
+            <PropertyRef Name="WORKER_DETAIL_ID" />
+          </Key>
+          <Property Name="WORKER_DETAIL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WORKER_FID" Type="int" Nullable="false" />
+          <Property Name="WORKER_IN_TIME" Type="datetime" Nullable="false" />
+          <Property Name="WORKER_OUT_TIME" Type="datetime" Nullable="false" />
+          <Property Name="WORKER_LEAVE_REASON" Type="nvarchar" MaxLength="200" />
+          <Property Name="RIDER_FID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tblfoodproducts_tblfoodcategory">
+          <End Role="tblFoodCategory" Type="Self.tblFoodCategory" Multiplicity="1" />
+          <End Role="tblFoodProducts" Type="Self.tblFoodProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFoodCategory">
+              <PropertyRef Name="FOOD_CATEGORY_ID" />
+            </Principal>
+            <Dependent Role="tblFoodProducts">
+              <PropertyRef Name="FOOD_CATEGORY_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblingredientlinking_tblfoodproducts">
+          <End Role="tblFoodProducts" Type="Self.tblFoodProducts" Multiplicity="1" />
+          <End Role="tblIngredientLinking" Type="Self.tblIngredientLinking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFoodProducts">
+              <PropertyRef Name="FOOD_PRODUCTS_ID" />
+            </Principal>
+            <Dependent Role="tblIngredientLinking">
+              <PropertyRef Name="FOOD_PRODUCTS_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblingredientlinking_tblingredient">
+          <End Role="tblIngredient" Type="Self.tblIngredient" Multiplicity="1" />
+          <End Role="tblIngredientLinking" Type="Self.tblIngredientLinking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblIngredient">
+              <PropertyRef Name="INGREDIENT_ID" />
+            </Principal>
+            <Dependent Role="tblIngredientLinking">
+              <PropertyRef Name="INGREDIENT_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblorderdetails_tblfoodproducts">
+          <End Role="tblFoodProducts" Type="Self.tblFoodProducts" Multiplicity="1" />
+          <End Role="tblOrderDetails" Type="Self.tblOrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFoodProducts">
+              <PropertyRef Name="FOOD_PRODUCTS_ID" />
+            </Principal>
+            <Dependent Role="tblOrderDetails">
+              <PropertyRef Name="FOOD_PRODUCTS_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblorderdetails_tblorder">
+          <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="1" />
+          <End Role="tblOrderDetails" Type="Self.tblOrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOrder">
+              <PropertyRef Name="ORDER_ID" />
+            </Principal>
+            <Dependent Role="tblOrderDetails">
+              <PropertyRef Name="ORDER_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblorderlinking_tblingredient">
+          <End Role="tblIngredient" Type="Self.tblIngredient" Multiplicity="1" />
+          <End Role="tblOrderLinking" Type="Self.tblOrderLinking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblIngredient">
+              <PropertyRef Name="INGREDIENT_ID" />
+            </Principal>
+            <Dependent Role="tblOrderLinking">
+              <PropertyRef Name="INGREDIENT_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblorderlinking_tblorderdetails">
+          <End Role="tblOrderDetails" Type="Self.tblOrderDetails" Multiplicity="1" />
+          <End Role="tblOrderLinking" Type="Self.tblOrderLinking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOrderDetails">
+              <PropertyRef Name="ORDER_DETAILS_ID" />
+            </Principal>
+            <Dependent Role="tblOrderLinking">
+              <PropertyRef Name="ORDER_DETAILS_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblorderpurchase_tblworker">
+          <End Role="tblWorker" Type="Self.tblWorker" Multiplicity="1" />
+          <End Role="tblOrderPurchase" Type="Self.tblOrderPurchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWorker">
+              <PropertyRef Name="WORKER_ID" />
+            </Principal>
+            <Dependent Role="tblOrderPurchase">
+              <PropertyRef Name="WORKER_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblorderpurchasedetail_tblingredient">
+          <End Role="tblIngredient" Type="Self.tblIngredient" Multiplicity="1" />
+          <End Role="tblOrderPurchaseDetail" Type="Self.tblOrderPurchaseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblIngredient">
+              <PropertyRef Name="INGREDIENT_ID" />
+            </Principal>
+            <Dependent Role="tblOrderPurchaseDetail">
+              <PropertyRef Name="INGREDIENT_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblRiderAssigningOrder_tblorder">
+          <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="1" />
+          <End Role="tblRiderAssigningOrder" Type="Self.tblRiderAssigningOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOrder">
+              <PropertyRef Name="ORDER_ID" />
+            </Principal>
+            <Dependent Role="tblRiderAssigningOrder">
+              <PropertyRef Name="ORDER_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblRiderAssigningOrder_tblRiderAssigningOrder">
+          <End Role="tblRider" Type="Self.tblRider" Multiplicity="1" />
+          <End Role="tblRiderAssigningOrder" Type="Self.tblRiderAssigningOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRider">
+              <PropertyRef Name="RIDER_ID" />
+            </Principal>
+            <Dependent Role="tblRiderAssigningOrder">
+              <PropertyRef Name="RIDER_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblworkerdetail_tblworkerdetail">
+          <End Role="tblRider" Type="Self.tblRider" Multiplicity="1" />
+          <End Role="tblWorkerDetail" Type="Self.tblWorkerDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRider">
+              <PropertyRef Name="RIDER_ID" />
+            </Principal>
+            <Dependent Role="tblWorkerDetail">
+              <PropertyRef Name="RIDER_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbKingsCafe1StoreContainer">
+          <EntitySet Name="tblAdmin" EntityType="Self.tblAdmin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblfeedback" EntityType="Self.tblfeedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblFoodCategory" EntityType="Self.tblFoodCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblFoodProducts" EntityType="Self.tblFoodProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblIngredient" EntityType="Self.tblIngredient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblIngredientLinking" EntityType="Self.tblIngredientLinking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOrder" EntityType="Self.tblOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOrderDetails" EntityType="Self.tblOrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOrderLinking" EntityType="Self.tblOrderLinking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOrderPurchase" EntityType="Self.tblOrderPurchase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOrderPurchaseDetail" EntityType="Self.tblOrderPurchaseDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblRider" EntityType="Self.tblRider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblRiderAssigningOrder" EntityType="Self.tblRiderAssigningOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblWorker" EntityType="Self.tblWorker" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblWorkerDetail" EntityType="Self.tblWorkerDetail" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblfoodproducts_tblfoodcategory" Association="Self.FK_tblfoodproducts_tblfoodcategory">
+            <End Role="tblFoodCategory" EntitySet="tblFoodCategory" />
+            <End Role="tblFoodProducts" EntitySet="tblFoodProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblingredientlinking_tblfoodproducts" Association="Self.FK_tblingredientlinking_tblfoodproducts">
+            <End Role="tblFoodProducts" EntitySet="tblFoodProducts" />
+            <End Role="tblIngredientLinking" EntitySet="tblIngredientLinking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblingredientlinking_tblingredient" Association="Self.FK_tblingredientlinking_tblingredient">
+            <End Role="tblIngredient" EntitySet="tblIngredient" />
+            <End Role="tblIngredientLinking" EntitySet="tblIngredientLinking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblorderdetails_tblfoodproducts" Association="Self.FK_tblorderdetails_tblfoodproducts">
+            <End Role="tblFoodProducts" EntitySet="tblFoodProducts" />
+            <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblorderdetails_tblorder" Association="Self.FK_tblorderdetails_tblorder">
+            <End Role="tblOrder" EntitySet="tblOrder" />
+            <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblorderlinking_tblingredient" Association="Self.FK_tblorderlinking_tblingredient">
+            <End Role="tblIngredient" EntitySet="tblIngredient" />
+            <End Role="tblOrderLinking" EntitySet="tblOrderLinking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblorderlinking_tblorderdetails" Association="Self.FK_tblorderlinking_tblorderdetails">
+            <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
+            <End Role="tblOrderLinking" EntitySet="tblOrderLinking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblorderpurchase_tblworker" Association="Self.FK_tblorderpurchase_tblworker">
+            <End Role="tblWorker" EntitySet="tblWorker" />
+            <End Role="tblOrderPurchase" EntitySet="tblOrderPurchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblorderpurchasedetail_tblingredient" Association="Self.FK_tblorderpurchasedetail_tblingredient">
+            <End Role="tblIngredient" EntitySet="tblIngredient" />
+            <End Role="tblOrderPurchaseDetail" EntitySet="tblOrderPurchaseDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblRiderAssigningOrder_tblorder" Association="Self.FK_tblRiderAssigningOrder_tblorder">
+            <End Role="tblOrder" EntitySet="tblOrder" />
+            <End Role="tblRiderAssigningOrder" EntitySet="tblRiderAssigningOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblRiderAssigningOrder_tblRiderAssigningOrder" Association="Self.FK_tblRiderAssigningOrder_tblRiderAssigningOrder">
+            <End Role="tblRider" EntitySet="tblRider" />
+            <End Role="tblRiderAssigningOrder" EntitySet="tblRiderAssigningOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblworkerdetail_tblworkerdetail" Association="Self.FK_tblworkerdetail_tblworkerdetail">
+            <End Role="tblRider" EntitySet="tblRider" />
+            <End Role="tblWorkerDetail" EntitySet="tblWorkerDetail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbKingsCafe1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblAdmin">
+          <Key>
+            <PropertyRef Name="ADMIN_ID" />
+          </Key>
+          <Property Name="ADMIN_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ADMIN_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ADMIN_EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ADMIN_PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ADMIN_CONTACT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ADMIN_ADDRESS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ADMIN_PICTURE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblfeedback">
+          <Key>
+            <PropertyRef Name="FEEDBACK_ID" />
+          </Key>
+          <Property Name="FEEDBACK_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FEEDBACK_DESCRIPTION" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FEEDBACK_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WHATSAPP_NO" Type="Int32" Nullable="false" />
+          <Property Name="PHONE_NO" Type="Int32" Nullable="false" />
+          <Property Name="ADDRESS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblFoodCategory">
+          <Key>
+            <PropertyRef Name="FOOD_CATEGORY_ID" />
+          </Key>
+          <Property Name="FOOD_CATEGORY_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FOOD_CATEGORY_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FOOD_CATEGORY_PICTURE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblFoodProducts" Relationship="Self.FK_tblfoodproducts_tblfoodcategory" FromRole="tblFoodCategory" ToRole="tblFoodProducts" />
+          <Property Name="PicLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblFoodProduct">
+          <Key>
+            <PropertyRef Name="FOOD_PRODUCTS_ID" />
+          </Key>
+          <Property Name="FOOD_PRODUCTS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FOOD_PRODUCTS_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FOOD_PRODUCTS_PRICE" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="FOOD_PRODUCTS_PICTURE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FOOD_CATEGORY_FID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblFoodCategory" Relationship="Self.FK_tblfoodproducts_tblfoodcategory" FromRole="tblFoodProducts" ToRole="tblFoodCategory" />
+          <NavigationProperty Name="tblIngredientLinkings" Relationship="Self.FK_tblingredientlinking_tblfoodproducts" FromRole="tblFoodProducts" ToRole="tblIngredientLinking" />
+          <NavigationProperty Name="tblOrderDetails" Relationship="Self.FK_tblorderdetails_tblfoodproducts" FromRole="tblFoodProducts" ToRole="tblOrderDetails" />
+          <Property Name="PicLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblIngredient">
+          <Key>
+            <PropertyRef Name="INGREDIENT_ID" />
+          </Key>
+          <Property Name="INGREDIENT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INGREDIENT_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="INGREDIENT_PRICE" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="INGREDIENT_UNIT_PRICE" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="tblIngredientLinkings" Relationship="Self.FK_tblingredientlinking_tblingredient" FromRole="tblIngredient" ToRole="tblIngredientLinking" />
+          <NavigationProperty Name="tblOrderLinkings" Relationship="Self.FK_tblorderlinking_tblingredient" FromRole="tblIngredient" ToRole="tblOrderLinking" />
+          <NavigationProperty Name="tblOrderPurchaseDetails" Relationship="Self.FK_tblorderpurchasedetail_tblingredient" FromRole="tblIngredient" ToRole="tblOrderPurchaseDetail" />
+        </EntityType>
+        <EntityType Name="tblIngredientLinking">
+          <Key>
+            <PropertyRef Name="INGREDIENT_LINKING_ID" />
+          </Key>
+          <Property Name="INGREDIENT_LINKING_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FOOD_PRODUCTS_FID" Type="Int32" Nullable="false" />
+          <Property Name="INGREDIENT_FID" Type="Int32" Nullable="false" />
+          <Property Name="INGREDIENT_LINKING_QUANTITY" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="tblFoodProduct" Relationship="Self.FK_tblingredientlinking_tblfoodproducts" FromRole="tblIngredientLinking" ToRole="tblFoodProducts" />
+          <NavigationProperty Name="tblIngredient" Relationship="Self.FK_tblingredientlinking_tblingredient" FromRole="tblIngredientLinking" ToRole="tblIngredient" />
+        </EntityType>
+        <EntityType Name="tblOrder">
+          <Key>
+            <PropertyRef Name="ORDER_ID" />
+          </Key>
+          <Property Name="ORDER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ORDER_CUSTOMER_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ORDER_CUSTOMER_ADDRESS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ORDER_CUSTOMER_CONTACT" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ORDER_STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ORDER_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ORDER_PAYMENT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblOrderDetails" Relationship="Self.FK_tblorderdetails_tblorder" FromRole="tblOrder" ToRole="tblOrderDetails" />
+          <NavigationProperty Name="tblRiderAssigningOrders" Relationship="Self.FK_tblRiderAssigningOrder_tblorder" FromRole="tblOrder" ToRole="tblRiderAssigningOrder" />
+        </EntityType>
+        <EntityType Name="tblOrderDetail">
+          <Key>
+            <PropertyRef Name="ORDER_DETAILS_ID" />
+          </Key>
+          <Property Name="ORDER_DETAILS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ORDER_FID" Type="Int32" Nullable="false" />
+          <Property Name="FOOD_PRODUCTS_FID" Type="Int32" Nullable="false" />
+          <Property Name="ORDER_DETAILS_QUANTITY" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ORDER_DETAILS_PRICE" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ORDER_DETAILS_isAdding" Type="Boolean" />
+          <Property Name="Ispicking" Type="Boolean" />
+          <NavigationProperty Name="tblFoodProduct" Relationship="Self.FK_tblorderdetails_tblfoodproducts" FromRole="tblOrderDetails" ToRole="tblFoodProducts" />
+          <NavigationProperty Name="tblOrder" Relationship="Self.FK_tblorderdetails_tblorder" FromRole="tblOrderDetails" ToRole="tblOrder" />
+          <NavigationProperty Name="tblOrderLinkings" Relationship="Self.FK_tblorderlinking_tblorderdetails" FromRole="tblOrderDetails" ToRole="tblOrderLinking" />
+        </EntityType>
+        <EntityType Name="tblOrderLinking">
+          <Key>
+            <PropertyRef Name="ORDER_LINKING_ID" />
+          </Key>
+          <Property Name="ORDER_LINKING_ID" Type="Int32" Nullable="false" />
+          <Property Name="INGREDIENT_FID" Type="Int32" Nullable="false" />
+          <Property Name="ORDER_DETAILS_FID" Type="Int32" Nullable="false" />
+          <Property Name="ORDER_LINKING_PRICE" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="tblIngredient" Relationship="Self.FK_tblorderlinking_tblingredient" FromRole="tblOrderLinking" ToRole="tblIngredient" />
+          <NavigationProperty Name="tblOrderDetail" Relationship="Self.FK_tblorderlinking_tblorderdetails" FromRole="tblOrderLinking" ToRole="tblOrderDetails" />
+        </EntityType>
+        <EntityType Name="tblOrderPurchase">
+          <Key>
+            <PropertyRef Name="ORDER_PURCHASE_ID" />
+          </Key>
+          <Property Name="ORDER_PURCHASE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ORDER_PURCHASE_DATE_TIME" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="WORKER_FID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblWorker" Relationship="Self.FK_tblorderpurchase_tblworker" FromRole="tblOrderPurchase" ToRole="tblWorker" />
+        </EntityType>
+        <EntityType Name="tblOrderPurchaseDetail">
+          <Key>
+            <PropertyRef Name="ORDER_PURCHASE_DETAIL_ID" />
+          </Key>
+          <Property Name="ORDER_PURCHASE_DETAIL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ORDER_PURCHASE_DETAIL_QUANTITY" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ORDER_PURCHASE_DETAIL_PRICE" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ORDER_PURCHASE_FID" Type="Int32" Nullable="false" />
+          <Property Name="INGREDIENT_FID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblIngredient" Relationship="Self.FK_tblorderpurchasedetail_tblingredient" FromRole="tblOrderPurchaseDetail" ToRole="tblIngredient" />
+        </EntityType>
+        <EntityType Name="tblRider">
+          <Key>
+            <PropertyRef Name="RIDER_ID" />
+          </Key>
+          <Property Name="RIDER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RIDER_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RIDER_CONTACT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RIDER_ADDRESS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RIDER_PAY" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="LocationRider" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RIDER_EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RIDER_PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblRiderAssigningOrders" Relationship="Self.FK_tblRiderAssigningOrder_tblRiderAssigningOrder" FromRole="tblRider" ToRole="tblRiderAssigningOrder" />
+          <NavigationProperty Name="tblWorkerDetails" Relationship="Self.FK_tblworkerdetail_tblworkerdetail" FromRole="tblRider" ToRole="tblWorkerDetail" />
+        </EntityType>
+        <EntityType Name="tblRiderAssigningOrder">
+          <Key>
+            <PropertyRef Name="RIDER_ASSIGNING_ORDER_ID" />
+          </Key>
+          <Property Name="RIDER_ASSIGNING_ORDER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ORDER_FID" Type="Int32" Nullable="false" />
+          <Property Name="RIDER_FID" Type="Int32" Nullable="false" />
+          <Property Name="Date_Time" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblOrder" Relationship="Self.FK_tblRiderAssigningOrder_tblorder" FromRole="tblRiderAssigningOrder" ToRole="tblOrder" />
+          <NavigationProperty Name="tblRider" Relationship="Self.FK_tblRiderAssigningOrder_tblRiderAssigningOrder" FromRole="tblRiderAssigningOrder" ToRole="tblRider" />
+        </EntityType>
+        <EntityType Name="tblWorker">
+          <Key>
+            <PropertyRef Name="WORKER_ID" />
+          </Key>
+          <Property Name="WORKER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WORKER_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WORKER_EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WORKER_PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WORKER_CONTACT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WORKER_ADDRESS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WORKER_PICTURES" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblOrderPurchases" Relationship="Self.FK_tblorderpurchase_tblworker" FromRole="tblWorker" ToRole="tblOrderPurchase" />
+        </EntityType>
+        <EntityType Name="tblWorkerDetail">
+          <Key>
+            <PropertyRef Name="WORKER_DETAIL_ID" />
+          </Key>
+          <Property Name="WORKER_DETAIL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WORKER_FID" Type="Int32" Nullable="false" />
+          <Property Name="WORKER_IN_TIME" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="WORKER_OUT_TIME" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="WORKER_LEAVE_REASON" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="RIDER_FID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblRider" Relationship="Self.FK_tblworkerdetail_tblworkerdetail" FromRole="tblWorkerDetail" ToRole="tblRider" />
+        </EntityType>
+        <Association Name="FK_tblfoodproducts_tblfoodcategory">
+          <End Role="tblFoodCategory" Type="Self.tblFoodCategory" Multiplicity="1" />
+          <End Role="tblFoodProducts" Type="Self.tblFoodProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFoodCategory">
+              <PropertyRef Name="FOOD_CATEGORY_ID" />
+            </Principal>
+            <Dependent Role="tblFoodProducts">
+              <PropertyRef Name="FOOD_CATEGORY_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblingredientlinking_tblfoodproducts">
+          <End Role="tblFoodProducts" Type="Self.tblFoodProduct" Multiplicity="1" />
+          <End Role="tblIngredientLinking" Type="Self.tblIngredientLinking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFoodProducts">
+              <PropertyRef Name="FOOD_PRODUCTS_ID" />
+            </Principal>
+            <Dependent Role="tblIngredientLinking">
+              <PropertyRef Name="FOOD_PRODUCTS_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblorderdetails_tblfoodproducts">
+          <End Role="tblFoodProducts" Type="Self.tblFoodProduct" Multiplicity="1" />
+          <End Role="tblOrderDetails" Type="Self.tblOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFoodProducts">
+              <PropertyRef Name="FOOD_PRODUCTS_ID" />
+            </Principal>
+            <Dependent Role="tblOrderDetails">
+              <PropertyRef Name="FOOD_PRODUCTS_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblingredientlinking_tblingredient">
+          <End Role="tblIngredient" Type="Self.tblIngredient" Multiplicity="1" />
+          <End Role="tblIngredientLinking" Type="Self.tblIngredientLinking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblIngredient">
+              <PropertyRef Name="INGREDIENT_ID" />
+            </Principal>
+            <Dependent Role="tblIngredientLinking">
+              <PropertyRef Name="INGREDIENT_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblorderlinking_tblingredient">
+          <End Role="tblIngredient" Type="Self.tblIngredient" Multiplicity="1" />
+          <End Role="tblOrderLinking" Type="Self.tblOrderLinking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblIngredient">
+              <PropertyRef Name="INGREDIENT_ID" />
+            </Principal>
+            <Dependent Role="tblOrderLinking">
+              <PropertyRef Name="INGREDIENT_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblorderpurchasedetail_tblingredient">
+          <End Role="tblIngredient" Type="Self.tblIngredient" Multiplicity="1" />
+          <End Role="tblOrderPurchaseDetail" Type="Self.tblOrderPurchaseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblIngredient">
+              <PropertyRef Name="INGREDIENT_ID" />
+            </Principal>
+            <Dependent Role="tblOrderPurchaseDetail">
+              <PropertyRef Name="INGREDIENT_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblorderdetails_tblorder">
+          <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="1" />
+          <End Role="tblOrderDetails" Type="Self.tblOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOrder">
+              <PropertyRef Name="ORDER_ID" />
+            </Principal>
+            <Dependent Role="tblOrderDetails">
+              <PropertyRef Name="ORDER_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblRiderAssigningOrder_tblorder">
+          <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="1" />
+          <End Role="tblRiderAssigningOrder" Type="Self.tblRiderAssigningOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOrder">
+              <PropertyRef Name="ORDER_ID" />
+            </Principal>
+            <Dependent Role="tblRiderAssigningOrder">
+              <PropertyRef Name="ORDER_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblorderlinking_tblorderdetails">
+          <End Role="tblOrderDetails" Type="Self.tblOrderDetail" Multiplicity="1" />
+          <End Role="tblOrderLinking" Type="Self.tblOrderLinking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOrderDetails">
+              <PropertyRef Name="ORDER_DETAILS_ID" />
+            </Principal>
+            <Dependent Role="tblOrderLinking">
+              <PropertyRef Name="ORDER_DETAILS_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblorderpurchase_tblworker">
+          <End Role="tblWorker" Type="Self.tblWorker" Multiplicity="1" />
+          <End Role="tblOrderPurchase" Type="Self.tblOrderPurchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWorker">
+              <PropertyRef Name="WORKER_ID" />
+            </Principal>
+            <Dependent Role="tblOrderPurchase">
+              <PropertyRef Name="WORKER_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblRiderAssigningOrder_tblRiderAssigningOrder">
+          <End Role="tblRider" Type="Self.tblRider" Multiplicity="1" />
+          <End Role="tblRiderAssigningOrder" Type="Self.tblRiderAssigningOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRider">
+              <PropertyRef Name="RIDER_ID" />
+            </Principal>
+            <Dependent Role="tblRiderAssigningOrder">
+              <PropertyRef Name="RIDER_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblworkerdetail_tblworkerdetail">
+          <End Role="tblRider" Type="Self.tblRider" Multiplicity="1" />
+          <End Role="tblWorkerDetail" Type="Self.tblWorkerDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRider">
+              <PropertyRef Name="RIDER_ID" />
+            </Principal>
+            <Dependent Role="tblWorkerDetail">
+              <PropertyRef Name="RIDER_FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbKingsCafeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblAdmins" EntityType="Self.tblAdmin" />
+          <EntitySet Name="tblfeedbacks" EntityType="Self.tblfeedback" />
+          <EntitySet Name="tblFoodCategories" EntityType="Self.tblFoodCategory" />
+          <EntitySet Name="tblFoodProducts" EntityType="Self.tblFoodProduct" />
+          <EntitySet Name="tblIngredients" EntityType="Self.tblIngredient" />
+          <EntitySet Name="tblIngredientLinkings" EntityType="Self.tblIngredientLinking" />
+          <EntitySet Name="tblOrders" EntityType="Self.tblOrder" />
+          <EntitySet Name="tblOrderDetails" EntityType="Self.tblOrderDetail" />
+          <EntitySet Name="tblOrderLinkings" EntityType="Self.tblOrderLinking" />
+          <EntitySet Name="tblOrderPurchases" EntityType="Self.tblOrderPurchase" />
+          <EntitySet Name="tblOrderPurchaseDetails" EntityType="Self.tblOrderPurchaseDetail" />
+          <EntitySet Name="tblRiders" EntityType="Self.tblRider" />
+          <EntitySet Name="tblRiderAssigningOrders" EntityType="Self.tblRiderAssigningOrder" />
+          <EntitySet Name="tblWorkers" EntityType="Self.tblWorker" />
+          <EntitySet Name="tblWorkerDetails" EntityType="Self.tblWorkerDetail" />
+          <AssociationSet Name="FK_tblfoodproducts_tblfoodcategory" Association="Self.FK_tblfoodproducts_tblfoodcategory">
+            <End Role="tblFoodCategory" EntitySet="tblFoodCategories" />
+            <End Role="tblFoodProducts" EntitySet="tblFoodProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblingredientlinking_tblfoodproducts" Association="Self.FK_tblingredientlinking_tblfoodproducts">
+            <End Role="tblFoodProducts" EntitySet="tblFoodProducts" />
+            <End Role="tblIngredientLinking" EntitySet="tblIngredientLinkings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblorderdetails_tblfoodproducts" Association="Self.FK_tblorderdetails_tblfoodproducts">
+            <End Role="tblFoodProducts" EntitySet="tblFoodProducts" />
+            <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblingredientlinking_tblingredient" Association="Self.FK_tblingredientlinking_tblingredient">
+            <End Role="tblIngredient" EntitySet="tblIngredients" />
+            <End Role="tblIngredientLinking" EntitySet="tblIngredientLinkings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblorderlinking_tblingredient" Association="Self.FK_tblorderlinking_tblingredient">
+            <End Role="tblIngredient" EntitySet="tblIngredients" />
+            <End Role="tblOrderLinking" EntitySet="tblOrderLinkings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblorderpurchasedetail_tblingredient" Association="Self.FK_tblorderpurchasedetail_tblingredient">
+            <End Role="tblIngredient" EntitySet="tblIngredients" />
+            <End Role="tblOrderPurchaseDetail" EntitySet="tblOrderPurchaseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblorderdetails_tblorder" Association="Self.FK_tblorderdetails_tblorder">
+            <End Role="tblOrder" EntitySet="tblOrders" />
+            <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblRiderAssigningOrder_tblorder" Association="Self.FK_tblRiderAssigningOrder_tblorder">
+            <End Role="tblOrder" EntitySet="tblOrders" />
+            <End Role="tblRiderAssigningOrder" EntitySet="tblRiderAssigningOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblorderlinking_tblorderdetails" Association="Self.FK_tblorderlinking_tblorderdetails">
+            <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
+            <End Role="tblOrderLinking" EntitySet="tblOrderLinkings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblorderpurchase_tblworker" Association="Self.FK_tblorderpurchase_tblworker">
+            <End Role="tblWorker" EntitySet="tblWorkers" />
+            <End Role="tblOrderPurchase" EntitySet="tblOrderPurchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblRiderAssigningOrder_tblRiderAssigningOrder" Association="Self.FK_tblRiderAssigningOrder_tblRiderAssigningOrder">
+            <End Role="tblRider" EntitySet="tblRiders" />
+            <End Role="tblRiderAssigningOrder" EntitySet="tblRiderAssigningOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblworkerdetail_tblworkerdetail" Association="Self.FK_tblworkerdetail_tblworkerdetail">
+            <End Role="tblRider" EntitySet="tblRiders" />
+            <End Role="tblWorkerDetail" EntitySet="tblWorkerDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbKingsCafe1StoreContainer" CdmEntityContainer="dbKingsCafeEntities">
+          <EntitySetMapping Name="tblAdmins">
+            <EntityTypeMapping TypeName="dbKingsCafe1.tblAdmin">
+              <MappingFragment StoreEntitySet="tblAdmin">
+                <ScalarProperty Name="ADMIN_ID" ColumnName="ADMIN_ID" />
+                <ScalarProperty Name="ADMIN_NAME" ColumnName="ADMIN_NAME" />
+                <ScalarProperty Name="ADMIN_EMAIL" ColumnName="ADMIN_EMAIL" />
+                <ScalarProperty Name="ADMIN_PASSWORD" ColumnName="ADMIN_PASSWORD" />
+                <ScalarProperty Name="ADMIN_CONTACT" ColumnName="ADMIN_CONTACT" />
+                <ScalarProperty Name="ADMIN_ADDRESS" ColumnName="ADMIN_ADDRESS" />
+                <ScalarProperty Name="ADMIN_PICTURE" ColumnName="ADMIN_PICTURE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblfeedbacks">
+            <EntityTypeMapping TypeName="dbKingsCafe1.tblfeedback">
+              <MappingFragment StoreEntitySet="tblfeedback">
+                <ScalarProperty Name="FEEDBACK_ID" ColumnName="FEEDBACK_ID" />
+                <ScalarProperty Name="FEEDBACK_DESCRIPTION" ColumnName="FEEDBACK_DESCRIPTION" />
+                <ScalarProperty Name="FEEDBACK_NAME" ColumnName="FEEDBACK_NAME" />
+                <ScalarProperty Name="WHATSAPP_NO" ColumnName="WHATSAPP_NO" />
+                <ScalarProperty Name="PHONE_NO" ColumnName="PHONE_NO" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblFoodCategories">
+            <EntityTypeMapping TypeName="dbKingsCafe1.tblFoodCategory">
+              <MappingFragment StoreEntitySet="tblFoodCategory">
+                <ScalarProperty Name="PicLink" ColumnName="PicLink" />
+                <ScalarProperty Name="FOOD_CATEGORY_ID" ColumnName="FOOD_CATEGORY_ID" />
+                <ScalarProperty Name="FOOD_CATEGORY_NAME" ColumnName="FOOD_CATEGORY_NAME" />
+                <ScalarProperty Name="FOOD_CATEGORY_PICTURE" ColumnName="FOOD_CATEGORY_PICTURE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblFoodProducts">
+            <EntityTypeMapping TypeName="dbKingsCafe1.tblFoodProduct">
+              <MappingFragment StoreEntitySet="tblFoodProducts">
+                <ScalarProperty Name="PicLink" ColumnName="PicLink" />
+                <ScalarProperty Name="FOOD_PRODUCTS_ID" ColumnName="FOOD_PRODUCTS_ID" />
+                <ScalarProperty Name="FOOD_PRODUCTS_NAME" ColumnName="FOOD_PRODUCTS_NAME" />
+                <ScalarProperty Name="FOOD_PRODUCTS_PRICE" ColumnName="FOOD_PRODUCTS_PRICE" />
+                <ScalarProperty Name="FOOD_PRODUCTS_PICTURE" ColumnName="FOOD_PRODUCTS_PICTURE" />
+                <ScalarProperty Name="FOOD_CATEGORY_FID" ColumnName="FOOD_CATEGORY_FID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblIngredients">
+            <EntityTypeMapping TypeName="dbKingsCafe1.tblIngredient">
+              <MappingFragment StoreEntitySet="tblIngredient">
+                <ScalarProperty Name="INGREDIENT_ID" ColumnName="INGREDIENT_ID" />
+                <ScalarProperty Name="INGREDIENT_NAME" ColumnName="INGREDIENT_NAME" />
+                <ScalarProperty Name="INGREDIENT_PRICE" ColumnName="INGREDIENT_PRICE" />
+                <ScalarProperty Name="INGREDIENT_UNIT_PRICE" ColumnName="INGREDIENT_UNIT_PRICE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblIngredientLinkings">
+            <EntityTypeMapping TypeName="dbKingsCafe1.tblIngredientLinking">
+              <MappingFragment StoreEntitySet="tblIngredientLinking">
+                <ScalarProperty Name="INGREDIENT_LINKING_ID" ColumnName="INGREDIENT_LINKING_ID" />
+                <ScalarProperty Name="FOOD_PRODUCTS_FID" ColumnName="FOOD_PRODUCTS_FID" />
+                <ScalarProperty Name="INGREDIENT_FID" ColumnName="INGREDIENT_FID" />
+                <ScalarProperty Name="INGREDIENT_LINKING_QUANTITY" ColumnName="INGREDIENT_LINKING_QUANTITY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOrders">
+            <EntityTypeMapping TypeName="dbKingsCafe1.tblOrder">
+              <MappingFragment StoreEntitySet="tblOrder">
+                <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
+                <ScalarProperty Name="ORDER_CUSTOMER_NAME" ColumnName="ORDER_CUSTOMER_NAME" />
+                <ScalarProperty Name="ORDER_CUSTOMER_ADDRESS" ColumnName="ORDER_CUSTOMER_ADDRESS" />
+                <ScalarProperty Name="ORDER_CUSTOMER_CONTACT" ColumnName="ORDER_CUSTOMER_CONTACT" />
+                <ScalarProperty Name="ORDER_STATUS" ColumnName="ORDER_STATUS" />
+                <ScalarProperty Name="ORDER_DATE" ColumnName="ORDER_DATE" />
+                <ScalarProperty Name="ORDER_PAYMENT" ColumnName="ORDER_PAYMENT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOrderDetails">
+            <EntityTypeMapping TypeName="dbKingsCafe1.tblOrderDetail">
+              <MappingFragment StoreEntitySet="tblOrderDetails">
+                <ScalarProperty Name="ORDER_DETAILS_ID" ColumnName="ORDER_DETAILS_ID" />
+                <ScalarProperty Name="ORDER_FID" ColumnName="ORDER_FID" />
+                <ScalarProperty Name="FOOD_PRODUCTS_FID" ColumnName="FOOD_PRODUCTS_FID" />
+                <ScalarProperty Name="ORDER_DETAILS_QUANTITY" ColumnName="ORDER_DETAILS_QUANTITY" />
+                <ScalarProperty Name="ORDER_DETAILS_PRICE" ColumnName="ORDER_DETAILS_PRICE" />
+                <ScalarProperty Name="ORDER_DETAILS_isAdding" ColumnName="ORDER_DETAILS_isAdding" />
+                <ScalarProperty Name="Ispicking" ColumnName="Ispicking" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOrderLinkings">
+            <EntityTypeMapping TypeName="dbKingsCafe1.tblOrderLinking">
+              <MappingFragment StoreEntitySet="tblOrderLinking">
+                <ScalarProperty Name="ORDER_LINKING_ID" ColumnName="ORDER_LINKING_ID" />
+                <ScalarProperty Name="INGREDIENT_FID" ColumnName="INGREDIENT_FID" />
+                <ScalarProperty Name="ORDER_DETAILS_FID" ColumnName="ORDER_DETAILS_FID" />
+                <ScalarProperty Name="ORDER_LINKING_PRICE" ColumnName="ORDER_LINKING_PRICE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOrderPurchases">
+            <EntityTypeMapping TypeName="dbKingsCafe1.tblOrderPurchase">
+              <MappingFragment StoreEntitySet="tblOrderPurchase">
+                <ScalarProperty Name="ORDER_PURCHASE_ID" ColumnName="ORDER_PURCHASE_ID" />
+                <ScalarProperty Name="ORDER_PURCHASE_DATE_TIME" ColumnName="ORDER_PURCHASE_DATE_TIME" />
+                <ScalarProperty Name="WORKER_FID" ColumnName="WORKER_FID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOrderPurchaseDetails">
+            <EntityTypeMapping TypeName="dbKingsCafe1.tblOrderPurchaseDetail">
+              <MappingFragment StoreEntitySet="tblOrderPurchaseDetail">
+                <ScalarProperty Name="ORDER_PURCHASE_DETAIL_ID" ColumnName="ORDER_PURCHASE_DETAIL_ID" />
+                <ScalarProperty Name="ORDER_PURCHASE_DETAIL_QUANTITY" ColumnName="ORDER_PURCHASE_DETAIL_QUANTITY" />
+                <ScalarProperty Name="ORDER_PURCHASE_DETAIL_PRICE" ColumnName="ORDER_PURCHASE_DETAIL_PRICE" />
+                <ScalarProperty Name="ORDER_PURCHASE_FID" ColumnName="ORDER_PURCHASE_FID" />
+                <ScalarProperty Name="INGREDIENT_FID" ColumnName="INGREDIENT_FID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblRiders">
+            <EntityTypeMapping TypeName="dbKingsCafe1.tblRider">
+              <MappingFragment StoreEntitySet="tblRider">
+                <ScalarProperty Name="RIDER_ID" ColumnName="RIDER_ID" />
+                <ScalarProperty Name="RIDER_NAME" ColumnName="RIDER_NAME" />
+                <ScalarProperty Name="RIDER_CONTACT" ColumnName="RIDER_CONTACT" />
+                <ScalarProperty Name="RIDER_ADDRESS" ColumnName="RIDER_ADDRESS" />
+                <ScalarProperty Name="RIDER_PAY" ColumnName="RIDER_PAY" />
+                <ScalarProperty Name="LocationRider" ColumnName="LocationRider" />
+                <ScalarProperty Name="RIDER_EMAIL" ColumnName="RIDER_EMAIL" />
+                <ScalarProperty Name="RIDER_PASSWORD" ColumnName="RIDER_PASSWORD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblRiderAssigningOrders">
+            <EntityTypeMapping TypeName="dbKingsCafe1.tblRiderAssigningOrder">
+              <MappingFragment StoreEntitySet="tblRiderAssigningOrder">
+                <ScalarProperty Name="RIDER_ASSIGNING_ORDER_ID" ColumnName="RIDER_ASSIGNING_ORDER_ID" />
+                <ScalarProperty Name="ORDER_FID" ColumnName="ORDER_FID" />
+                <ScalarProperty Name="RIDER_FID" ColumnName="RIDER_FID" />
+                <ScalarProperty Name="Date_Time" ColumnName="Date_Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblWorkers">
+            <EntityTypeMapping TypeName="dbKingsCafe1.tblWorker">
+              <MappingFragment StoreEntitySet="tblWorker">
+                <ScalarProperty Name="WORKER_ID" ColumnName="WORKER_ID" />
+                <ScalarProperty Name="WORKER_NAME" ColumnName="WORKER_NAME" />
+                <ScalarProperty Name="WORKER_EMAIL" ColumnName="WORKER_EMAIL" />
+                <ScalarProperty Name="WORKER_PASSWORD" ColumnName="WORKER_PASSWORD" />
+                <ScalarProperty Name="WORKER_CONTACT" ColumnName="WORKER_CONTACT" />
+                <ScalarProperty Name="WORKER_ADDRESS" ColumnName="WORKER_ADDRESS" />
+                <ScalarProperty Name="WORKER_PICTURES" ColumnName="WORKER_PICTURES" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblWorkerDetails">
+            <EntityTypeMapping TypeName="dbKingsCafe1.tblWorkerDetail">
+              <MappingFragment StoreEntitySet="tblWorkerDetail">
+                <ScalarProperty Name="WORKER_DETAIL_ID" ColumnName="WORKER_DETAIL_ID" />
+                <ScalarProperty Name="WORKER_FID" ColumnName="WORKER_FID" />
+                <ScalarProperty Name="WORKER_IN_TIME" ColumnName="WORKER_IN_TIME" />
+                <ScalarProperty Name="WORKER_OUT_TIME" ColumnName="WORKER_OUT_TIME" />
+                <ScalarProperty Name="WORKER_LEAVE_REASON" ColumnName="WORKER_LEAVE_REASON" />
+                <ScalarProperty Name="RIDER_FID" ColumnName="RIDER_FID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
